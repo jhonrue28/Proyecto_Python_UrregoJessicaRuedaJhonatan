@@ -21,3 +21,5 @@ if opcion1==2:
     print("Eres Trainer")
 if opcion1==3:
     print("Eres Administrador")
+    print ("hola")
+    
