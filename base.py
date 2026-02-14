@@ -8,6 +8,33 @@ infoCampers=[{
     "Estado":0,
     "Riesgo":0,
 }]
+trainers =[{
+    "nombre" :"Edwen salas",
+    "ruta": ["java", "netcore"],
+    "horario": "6:00-14:00"
+    },{ 
+    "nombre" :"Jolver",
+    "ruta": ["JAVA ","netcore"],
+    "horario": "6:00-14:00"
+    },{
+    "nombre": "Kevin David",
+    "ruta": "JAVA",
+    "horario ":"6:00- 14:00"
+
+    },{
+    "nombre" :"Pedro Gomez",
+    "ruta": ["JAVA ", "netcore"],
+    "horario": "6:00-14:00"
+    },{
+    "nombre" : "Cristian ",
+    "ruta": ["JAVA","nodejs"],
+    "horario": "10:00-18:00"
+    },{
+    "nombre": "Carlos Rueda",
+    "ruta": "JAVA",
+    "horario": "2:00-22:00"
+}]
+print ("hola")
 
 print ("Menú principal")
 print("¿Quién eres?")
