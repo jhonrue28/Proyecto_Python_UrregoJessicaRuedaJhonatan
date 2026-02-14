@@ -1,16 +1,6 @@
 #Diccionario para campers
 #RECUERDA QUE TODO ESTO ESTÁ SIN PERSISTENCIA.
-infoCampers=[{
-    "nombre":0,
-    "apellidos":0,
-    "direccion":0,
-    "acudiente":0,
-    "telCel":0,
-    "TelFijo":0,
-    "Estado":0,
-    "Riesgo":0,
-    "notas":[0,0,0]
-}]
+import json
 #Diccionario información básica de trainers
 trainers =[{
     "nombre" :"Edwen salas",
@@ -60,6 +50,8 @@ while booleanito==True:
             print("3.Salir del perfil de Camper")
             opcamper=int(input(": "))
             if opcamper==1:
+                with open("infoCampers.json", "r+") as f:
+                    infoCampers = json.load(f)
                 #Creacion de un nuevo camper para inscribirlo
                 nuevo={
                     "nombre":0,
@@ -71,24 +63,27 @@ while booleanito==True:
                     "Estado":0,
                     "Riesgo":0,
                 }
-                print ("Bienvenido a el registro")
-                print("Recuerda que solo te debes registrar una vez")
-                print ("presiona ENTER para inicial")
-                input ("")
-                print("¿cual es tu nombre? OJO solo nombre, no apellidos")
-                nuevo["nombre"]=input(": ")
-                print ("Apellido")
-                nuevo["apellidos"]=input(": ")
-                print("direccion")
-                nuevo["direccion"]=input(": ")
-                print("Acudiente")
-                nuevo["acudiente"]=input(": ")
-                print("telefono celular")
-                nuevo["telCel"]=input(": ")
-                print("telefono fijo")
-                nuevo["TelFijo"]=input(": ")
-                #El siguiente algoritmo es el cual agrega a la lista el Camper que de está inscribiendo lista.append(¿Que añades?)
-                infoCampers.append(nuevo)
+                with open("infoCampers.json", "r+") as f:
+                    infoCampers = json.load(f)
+                    print ("Bienvenido a el registro")
+                    print("Recuerda que solo te debes registrar una vez")
+                    print ("presiona ENTER para inicial")
+                    input ("")
+                    print("¿cual es tu nombre? OJO solo nombre, no apellidos")
+                    nuevo["nombre"]=input(": ")
+                    print ("Apellido")
+                    nuevo["apellidos"]=input(": ")
+                    print("direccion")
+                    nuevo["direccion"]=input(": ")
+                    print("Acudiente")
+                    nuevo["acudiente"]=input(": ")
+                    print("telefono celular")
+                    nuevo["telCel"]=input(": ")
+                    print("telefono fijo")
+                    nuevo["TelFijo"]=input(": ")
+                    #El siguiente algoritmo es el cual agrega a la lista el Camper que de está inscribiendo lista.append(¿Que añades?)
+                    infoCampers.append(nuevo)
+                    json.dump(infoCampers,f)
                 print("Ya quedaste registrado :D")
                 print("Diste el primer paso, El más importante")
             if opcamper==2:
@@ -97,29 +92,34 @@ while booleanito==True:
                 nombreBuscar=input("Nombre con el que te registraste  / solo nombre, no apellido (Recuerda escribirlo igual)")
                 apellidoBuscar=input("¿Cual es tu apellido?")
                 for i in range (len(infoCampers)):
-                    #El ciclo for lo que hace es buscar en el diccionario de infocampers uno en el cual el nombre y apellido sean el mismo
-                    if infoCampers[i]["nombre"] == nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
-                        print("Bienvenido ",infoCampers[i]["nombre"])
-                        print("tu estado actual es: ",infoCampers[i]["Estado"])
-                        print("Que deseas hacer?")
-                        print("1.¿Cual es mi ruta?")
-                        print("2.¿Cuales son mis notas?")
-                        print("3.Retirarse")
-                        decision2=int(input(": "))
-                        if decision2==1:
-                            #Falta programar para que podamos hacer que el vea la ruta la cual le tocó, el treiner, el salón y el horario
-                            print("Falta programar para poner la ruta")
-                        if decision2==2:
-                            print ("tus notas son: ",infoCampers[i]["notas"])
-                        if decision2==3:
-                            print("¿Estás seguro de querer retirarte?")
-                            print("1. Si, 2. No")
-                            confirmacion=int(input(": "))
-                            if   confirmacion==1:
-                                #Cambia su propio estado a RETIRADO
-                                print("Esperamos te vaya super bien")
-                                print("Muchas gracias por haber estado acá")
-                                infoCampers[i]["Estado"]= "Retirado"
+                    with open("infoCampers.json", "r+") as f:
+                        infoCampers = json.load(f)
+                        #El ciclo for lo que hace es buscar en el diccionario de infocampers uno en el cual el nombre y apellido sean el mismo
+                        if infoCampers[i]["nombre"] == nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
+                            print("Bienvenido ",infoCampers[i]["nombre"])
+                            print("tu estado actual es: ",infoCampers[i]["Estado"])
+                            print("Que deseas hacer?")
+                            print("1.¿Cual es mi ruta?")
+                            print("2.¿Cuales son mis notas?")
+                            print("3.Retirarse")
+                            decision2=int(input(": "))
+                            if decision2==1:
+                                #Falta programar para que podamos hacer que el vea la ruta la cual le tocó, el treiner, el salón y el horario
+                                print("Falta programar para poner la ruta")
+                            if decision2==2:
+                                print ("tus notas son: ",infoCampers[i]["notas"])
+                            if decision2==3:
+                                print("¿Estás seguro de querer retirarte?")
+                                print("1. Si, 2. No")
+                                confirmacion=int(input(": "))
+                                if   confirmacion==1:
+                                    with open("infoCampers.json", "r+") as f:
+                                        infoCampers = json.load(f)
+                                        #Cambia su propio estado a RETIRADO
+                                        print("Esperamos te vaya super bien")
+                                        print("Muchas gracias por haber estado acá")
+                                        infoCampers[i]["Estado"]= "Retirado"
+                                        json.dump(infoCampers, f)
             if opcamper==3:
                 print(" ")
                 print("-_-")
@@ -139,17 +139,22 @@ while booleanito==True:
         for i in range (len(infoCampers)):
             #Busca un camper con ese nombre y ese apellido y se mete en el perfil de el para modificar el estado , pero hay que agregar el resto de funciones.
             if infoCampers[i]["nombre"] == nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
-                print("En que estado vas a poner al Camper?")
-                print("1.Aprobado")
-                print("2.Expulsado")
-                print("3.Retirado")
-                decisionA=int(input(": "))
-                if decisionA==1:
-                    infoCampers[i]["Estado"]="Aprobado"
-                if decisionA==2:
-                    infoCampers[i]["Estado"]="Aprobado"
-                if decisionA==3:
-                    infoCampers[i]["Estado"]="Aprobado"
+                with open("infoCampers.json", "r+") as f:
+                    infoCampers = json.load(f)
+                    print("En que estado vas a poner al Camper?")
+                    print("1.Aprobado")
+                    print("2.Expulsado")
+                    print("3.Retirado")
+                    decisionA=int(input(": "))
+                    if decisionA==1:
+                        infoCampers[i]["Estado"]="Aprobado"
+                        json.dump(infoCampers, f)
+                    if decisionA==2:
+                        infoCampers[i]["Estado"]="Aprobado"
+                        json.dump(infoCampers, f)
+                    if decisionA==3:
+                        infoCampers[i]["Estado"]="Aprobado"
+                        json.dump(infoCampers, f)
             else:
                 print("No hay un estudiante registrado con ese nombre")
                 print(" ")
