@@ -1,3 +1,5 @@
+#Diccionario para campers
+#RECUERDA QUE TODO ESTO ESTÁ SIN PERSISTENCIA.
 infoCampers=[{
     "nombre":0,
     "apellidos":0,
@@ -9,6 +11,7 @@ infoCampers=[{
     "Riesgo":0,
     "notas":[0,0,0]
 }]
+#Diccionario información básica de trainers
 trainers =[{
     "nombre" :"Edwen salas",
     "ruta": ["java", "netcore"],
@@ -36,6 +39,7 @@ trainers =[{
     "horario": "2:00-22:00"
 }] 
 
+#Ciclo para el menú principal de asignacion de roles
 booleanito=True
 while booleanito==True:
     print ("Menú principal")
@@ -46,6 +50,7 @@ while booleanito==True:
     print("4.Salir del programa")
     opcion1=int(input(": "))
     if opcion1==1:
+        #Ciclo para el rol de Camper
         condcamper=True
         while condcamper==True:
             print("Bienvenido al menú de camper")
@@ -55,6 +60,7 @@ while booleanito==True:
             print("3.Salir del perfil de Camper")
             opcamper=int(input(": "))
             if opcamper==1:
+                #Creacion de un nuevo camper para inscribirlo
                 nuevo={
                     "nombre":0,
                     "apellidos":0,
@@ -81,6 +87,7 @@ while booleanito==True:
                 nuevo["telCel"]=input(": ")
                 print("telefono fijo")
                 nuevo["TelFijo"]=input(": ")
+                #El siguiente algoritmo es el cual agrega a la lista el Camper que de está inscribiendo lista.append(¿Que añades?)
                 infoCampers.append(nuevo)
                 print("Ya quedaste registrado :D")
                 print("Diste el primer paso, El más importante")
@@ -90,6 +97,7 @@ while booleanito==True:
                 nombreBuscar=input("Nombre con el que te registraste  / solo nombre, no apellido (Recuerda escribirlo igual)")
                 apellidoBuscar=input("¿Cual es tu apellido?")
                 for i in range (len(infoCampers)):
+                    #El ciclo for lo que hace es buscar en el diccionario de infocampers uno en el cual el nombre y apellido sean el mismo
                     if infoCampers[i]["nombre"] == nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
                         print("Bienvenido ",infoCampers[i]["nombre"])
                         print("tu estado actual es: ",infoCampers[i]["Estado"])
@@ -99,6 +107,7 @@ while booleanito==True:
                         print("3.Retirarse")
                         decision2=int(input(": "))
                         if decision2==1:
+                            #Falta programar para que podamos hacer que el vea la ruta la cual le tocó, el treiner, el salón y el horario
                             print("Falta programar para poner la ruta")
                         if decision2==2:
                             print ("tus notas son: ",infoCampers[i]["notas"])
@@ -107,6 +116,7 @@ while booleanito==True:
                             print("1. Si, 2. No")
                             confirmacion=int(input(": "))
                             if   confirmacion==1:
+                                #Cambia su propio estado a RETIRADO
                                 print("Esperamos te vaya super bien")
                                 print("Muchas gracias por haber estado acá")
                                 infoCampers[i]["Estado"]= "Retirado"
@@ -118,13 +128,16 @@ while booleanito==True:
                 condcamper=False
                 print(" ")
     if opcion1==2:
+        #Falta programar para hacer las funciones de treiner
         print("Eres Trainer")
     if opcion1==3:
+        #Falta hacer el menú de administrador. pero está hecha la funcion de cambiar el estado de un camper 
         print("Eres Administrador")
         print("Cambiar Estado de estudiante")
         nombreBuscar=input("Nombre del CamperSsolo nombre, no apellido")
         apellidoBuscar=input("¿Cual es el apellido?")
         for i in range (len(infoCampers)):
+            #Busca un camper con ese nombre y ese apellido y se mete en el perfil de el para modificar el estado , pero hay que agregar el resto de funciones.
             if infoCampers[i]["nombre"] == nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
                 print("En que estado vas a poner al Camper?")
                 print("1.Aprobado")
@@ -142,6 +155,7 @@ while booleanito==True:
                 print(" ")
                         
     if opcion1==4:
+        #Cierre del sistema
         print("Gracias por usar nuestro sistema")
         print("Te esperamos pronto")
         print(":D")
