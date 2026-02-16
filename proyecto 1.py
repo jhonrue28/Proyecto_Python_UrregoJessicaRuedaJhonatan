@@ -51,12 +51,10 @@ while booleanito==True:
             opcamper=int(input(": "))
             if opcamper==1:
                 with open("infoCampers.json", "r+") as f:
-                    infoCampers = json.load(f)
-                    nuevo_id = len(infoCampers) + 1
-                   
+                    infoCampers = json.load(f)                  
                 #Creacion de un nuevo camper para inscribirlo
                     nuevo= {
-                    "Id": id_generado,
+                    "Id": 0,
                     "nombre":0,
                     "apellidos":0,
                     "direccion":0,
@@ -72,10 +70,9 @@ while booleanito==True:
                     print("Recuerda que solo te debes registrar una vez")
                     print ("presiona ENTER para inicial")
                     input ("")
-                    id_generado = len(infoCampers) + 1
                 #print(f"Tu ID asignado es: {id_generado}")
                     
-                    nuevo["Id"]=input((f"Tu ID asignado es: {id_generado}"))
+                    nuevo["id"]=int(input("Digita tu número de documento : "))
                     print("¿cual es tu nombre? OJO solo nombre, no apellidos")
                     nuevo["nombre"]=input(": ")
                     print ("Apellido")
@@ -95,7 +92,6 @@ while booleanito==True:
                     
                     
                     print("Ya quedaste registrado :D")
-                    print(f"¡Registro exitoso! Por favor no olvides tu ID: {id_generado}")
                     print("Diste el primer paso, El más importante")
             if opcamper==2:
                 print("")
@@ -147,110 +143,108 @@ while booleanito==True:
            
      print("\n--- MENÚ COORDINADOR ---")
      with open("infoCampers.json", "r") as f:
-                infoCampers = json.load(f)
+        infoCampers = json.load(f)
        
-     print("¿Cómo deseas buscar al Camper?")
-    print("1. Por ID")
-    print("2. Por Nombre y Apellido")
-    
-    metodo = int(input(": "))
+        print("¿Cómo deseas buscar al Camper?")
+        print("1. Por ID")
+        print("2. Por Nombre y Apellido")
+        
+        metodo = int(input(": "))
 
-    camper_encontrado = None
+        camper_encontrado = None
 
-    if metodo == 1:
+        if metodo == 1:
             id_buscar = int(input("Ingrese el ID: "))
             for c in infoCampers:
-                if c.get("id") == id_buscar:
+                if infoCampers[c]["id"] == id_buscar:
                     camper_encontrado = c
                     break
-    elif metodo == 2:
+        elif metodo == 2:
             nom = input("Nombre: ")
             ape = input("Apellido: ")
             for c in infoCampers:
-                if c["nombre"] == nom and c["apellidos"] == ape:
+                if c.get("nombre")== nom and c.get("apellidos") == ape:
                     camper_encontrado = c
                     break
 
-    if camper_encontrado:
-            print(f"\nCamper seleccionado: {camper_encontrado['nombre']} (Estado: {camper_encontrado['Estado']})")
-            print("1. Cambiar Estado (Aprobado/Expulsado/etc)")
-            print("2. Asignar Ruta de Entrenamiento")
-            print("3. Registrar Notas De Estudiante")
-            accion = int(input(": "))
+            if camper_encontrado:
+                print(f"\nCamper seleccionado: {camper_encontrado['nombre']} (Estado: {camper_encontrado['Estado']})")
+                print("1. Cambiar Estado (Aprobado/Expulsado/etc)")
+                print("2. Asignar Ruta de Entrenamiento")
+                print("3. Registrar Notas De Estudiante")
+                accion = int(input(": "))
 
-            if accion == 1:
-                print("Estados: 1.Aprobado, 2.Expulsado, 3.Retirado")
-                nuevo_est = int(input(": "))
-                mapa = {1: "Aprobado", 2: "Expulsado", 3: "Retirado"}
-                if nuevo_est in mapa:
-                    camper_encontrado["Estado"] = mapa[nuevo_est]
-                    print("Estado actualizado.")
+                if accion == 1:
+                    print("Estados: 1.Aprobado, 2.Expulsado, 3.Retirado")
+                    nuevo_est = int(input(": "))
+                    mapa = {1: "Aprobado", 2: "Expulsado", 3: "Retirado"}
+                    if nuevo_est in mapa:
+                        camper_encontrado["Estado"] = mapa[nuevo_est]
+                        print("Estado actualizado.")
 
-            elif accion == 2:
-                if camper_encontrado["Estado"] == "Aprobado":
-                    print("Rutas: 1.NodeJS, 2.Java, 3.NetCore")
-                    r = int(input(": "))
-                    mapa_r = {1: "NodeJS", 2: "Java", 3: "NetCore"}
-                    if r in mapa_r:
-                        camper_encontrado["Ruta"] = mapa_r[r]
-                        camper_encontrado["Estado"] = "Aprobado"
-                        print(f"Asignado a {mapa_r[r]}")
-                else:
-                    print("Error: El camper debe estar 'Aprobado' para asignar ruta.")
-
-            # GUARDAR CAMBIOS: Sobrescribimos el archivo con la lista actualizada
-            with open("infoCampers.json", "w") as f:
-                json.dump(infoCampers, f, indent=4)
-    else:
-            print("No se encontró ningún camper con esos datos.")
-    if accion == 3: # Nueva opción: Registrar Notas de Módulo
-            print("\n--- REGISTRO DE NOTAS DE MÓDULO ---")
-            # Solo se evalúa si está cursando una ruta
-            if camper_encontrado["Estado"] == "Aprobado":
-                try:
-                    nota_teorica = float(input("Ingrese nota Teórica (30%): "))
-                    nota_practica = float(input("Ingrese nota Práctica (60%): "))
-                    nota_trabajos = float(input("Ingrese nota de Quices/Trabajos (10%): "))
-                    
-                    # Cálculo con porcentajes
-                    nota_final = (nota_teorica * 0.3) + (nota_practica * 0.6) + (nota_trabajos * 0.1)
-                    
-                    print(f"\nLa nota final obtenida es: {nota_final:.2f}")
-
-                    # Guardamos el historial de notas en el objeto del camper
-                    if "notas_modulos" not in camper_encontrado:
-                        camper_encontrado["notas_modulos"] = []
-                    
-                    registroNotas= {
-                       "teorica": nota_teorica,
-                       "practica": nota_practica,
-                        "trabajos": nota_trabajos,
-                        "final": nota_final
-                    }
-                    camper_encontrado["notas_modulos"].append(registroNotas)
-
-                    # Lógica de Rendimiento Bajo (Llamado de atención)
-                    if nota_final < 60:
-                        camper_encontrado["Riesgo"] = "Alto"
-                        print("¡ALERTA!: Rendimiento bajo. Se ha generado un llamado de atención.")
+                if accion == 2:
+                    if camper_encontrado["Estado"] == "Aprobado":
+                        print("Rutas: 1.NodeJS, 2.Java, 3.NetCore")
+                        r = int(input(": "))
+                        mapa_r = {1: "NodeJS", 2: "Java", 3: "NetCore"}
+                        if r in mapa_r:
+                            camper_encontrado["Ruta"] = mapa_r[r]
+                            camper_encontrado["Estado"] = "Aprobado"
+                            print(f"Asignado a {mapa_r[r]}")
                     else:
-                        camper_encontrado["Riesgo"] = "Bajo"
-                        print("Módulo aprobado satisfactoriamente.")
+                        print("Error: El camper debe estar 'Aprobado' para asignar ruta.")
 
-                except ValueError:
-                    print("Error: Ingrese solo números para las notas.")
+                # GUARDAR CAMBIOS: Sobrescribimos el archivo con la lista actualizada
+                with open("infoCampers.json", "w") as f: 
+                    json.dump(infoCampers, f, indent=4)
+
+                if accion == 3: # Nueva opción: Registrar Notas de Módulo
+                    print("\n--- REGISTRO DE NOTAS DE MÓDULO ---")
+                # Solo se evalúa si está cursando una ruta
+                    if camper_encontrado["Estado"] == "Aprobado":
+                        try:
+                            nota_teorica = float(input("Ingrese nota Teórica (30%): "))
+                            nota_practica = float(input("Ingrese nota Práctica (60%): "))
+                            nota_trabajos = float(input("Ingrese nota de Quices/Trabajos (10%): "))
+                            
+                            # Cálculo con porcentajes
+                            nota_final = (nota_teorica * 0.3) + (nota_practica * 0.6) + (nota_trabajos * 0.1)
+                            
+                            print(f"\nLa nota final obtenida es: {nota_final:.2f}")
+
+                            # Guardamos el historial de notas en el objeto del camper
+                            if "notas_modulos" not in camper_encontrado:
+                                camper_encontrado["notas_modulos"] = []
+                            
+                            registroNotas= {
+                            "teorica": nota_teorica,
+                            "practica": nota_practica,
+                                "trabajos": nota_trabajos,
+                                "final": nota_final
+                            }
+                            camper_encontrado["notas_modulos"].append(registroNotas)
+
+                            # Lógica de Rendimiento Bajo (Llamado de atención)
+                            if nota_final < 60:
+                                camper_encontrado["Riesgo"] = "Alto"
+                                print("¡ALERTA!: Rendimiento bajo. Se ha generado un llamado de atención.")
+                            else:
+                                camper_encontrado["Riesgo"] = "Bajo"
+                                print("Módulo aprobado satisfactoriamente.")
+
+                        except ValueError:
+                            print("Error: Ingrese solo números para las notas.")
+                        else:
+                            print("Error: Solo se pueden registrar notas para campers en estado 'Aprobado'.")
+
+                    # Guardar cambios en el JSON
+                    with open("infoCampers.json", "w") as f:
+                        json.dump(infoCampers, f, indent=4)
             else:
-                print("Error: Solo se pueden registrar notas para campers en estado 'Aprobado'.")
-
-            # Guardar cambios en el JSON
-            with open("infoCampers.json", "w") as f:
-                json.dump(infoCampers, f, indent=4)
-
-
-                        
-            if opcion1==4:
-        #Cierre del sistema
-                print("Gracias por usar nuestro sistema")
-                print("Te esperamos pronto")
-                print(":D")
-                booleanito=False
+                    print("No se encontró ningún camper con esos datos.")
+#Cierre del sistema
+    if opcion1==4:
+        print("Gracias por usar nuestro sistema")
+        print("Te esperamos pronto")
+        print(":D")
+        booleanito=False
