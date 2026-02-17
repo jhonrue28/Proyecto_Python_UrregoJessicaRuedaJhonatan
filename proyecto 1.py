@@ -17,7 +17,7 @@ trainers = [
 # ---------------------------
 # PRIMER PASO: cargar o crear rutas.json
 # ---------------------------
-try:
+try: #evita que se rompa el codigo si hay un error
     with open("rutas.json", "r") as f:
         rutas = json.load(f)
 except FileNotFoundError:
@@ -29,12 +29,12 @@ except FileNotFoundError:
         "Backend"
     ]
     salones = {"NodeJS": "A1", "Java": "B1", "NetCore": "C1"}
-    capacidad_salon = 33
+    capacidad_salon = 35
 
     rutas = {}
     for ruta in ["NodeJS", "Java", "NetCore"]:
-        ruta_lower = ruta.lower()
-        disponibles = [t["nombre"] for t in trainers if ruta_lower in [r.lower() for r in t["ruta"]]]
+        ruta_lower = ruta.lower() # lowe convertir texto a minusculas
+        disponibles = [t["nombre"] for t in trainers if ruta_lower in [r.lower() for r in t["ruta"]]] #t itinera
         principal = disponibles[0] if disponibles else ""
         rutas[ruta] = {
             "capacidad_salon": capacidad_salon,
@@ -121,16 +121,16 @@ while booleanito==True:
                 print("Primero queremos reconocerte :P")
                 nombreBuscar=input("Nombre con el que te registraste  / solo nombre, no apellido (Recuerda escribirlo igual)")
                 apellidoBuscar=input("¿Cual es tu apellido?")
-                for i in range (len("infoCampers")):
-                    with open("infoCampers.json", "r") as f:
+              #  for i in range (len(infoCampers)):
+                with open("infoCampers.json", "r") as f:
                         infoCampers = json.load(f)
-                        
-                    
-
-                        #El ciclo for lo que hace es buscar en el diccionario de infocampers uno en el cual el nombre y apellido sean el mismo
-                        if infoCampers[i]["nombre"]== nombreBuscar and infoCampers[i]["apellidos"]== apellidoBuscar:
-                            print("Bienvenido ",infoCampers[i]["nombre"])
-                            print("tu estado actual es: ",infoCampers[i]["Estado"])
+                encontrado=False
+               # for i in range (len(infoCampers)):
+                for camper in infoCampers: #El ciclo for lo que hace es buscar en el diccionario de infocampers uno en el cual el nombre y apellido sean el mismo
+                   if camper["nombre"]== nombreBuscar and camper["apellidos"]== apellidoBuscar:
+                            encontrado=True
+                            print("Bienvenido ",camper["nombre"])
+                            print("tu estado actual es:",camper["Estado"])
                             print("Que deseas hacer?")
                             print("1.¿Cual es mi ruta?")
                             print("2.¿Cuales son mis notas?")
@@ -138,11 +138,20 @@ while booleanito==True:
                             print("4.Volver Menu Principal")
                             decision2=int(input(": "))
                             if decision2==1:
-
-                                #Falta programar para que podamos hacer que el vea la ruta la cual le tocó, el treiner, el salón y el horario
-                                print("Falta programar para poner la ruta")
+ 
+                              if "Ruta" in camper:
+                                print("Tu ruta es:", camper["Ruta"])
+                                print("Tu salón es:", camper["Salon"])
+                                print("Tu trainer encargado es:", camper["Trainer"])
+                              else:
+                                print("Aún no te han asignado una ruta.")
+                                break
+                               
                             if decision2==2:
-                                print ("tus notas son: ",infoCampers[i]["notas_modulos"])
+                              if "notas_modulos" in camper:
+                                print("Tus notas son:", camper["notas_modulos"])
+                              else:
+                                print("Aún no tienes notas asignadas.")
                             if decision2==3:
                                 print("¿Estás seguro de querer retirarte?")
                                 print("1. Si" " 2. No")
@@ -220,8 +229,6 @@ while booleanito==True:
                       print("Estado actualizado.")
 
               if accion == 2:
-                    
-                    # Mostrar rutas disponibles
                      print("\n--- RUTAS DISPONIBLES ---")
                      for r, info in rutas.items():
                         print(f"{r}: {len(info['campers'])}/{info['capacidad_salon']} campers asignados")
@@ -246,19 +253,19 @@ while booleanito==True:
                             with open("rutas.json", "w") as f:
                                 json.dump(rutas, f, indent=4)
 
-                            print(f"✅ Camper {camper_encontrado['nombre']} asignado a {ruta_elegida} con Trainer {ruta_info['trainer']} en el salón {ruta_info['salon']}")
+                            print(f" Camper {camper_encontrado['nombre']} asignado a {ruta_elegida} con Trainer {ruta_info['trainer']} en el salón {ruta_info['salon']}")
                         else:
-                            print("❌ La ruta seleccionada ya alcanzó su capacidad máxima")
+                            print(" La ruta seleccionada ya alcanzó su capacidad máxima")
                      else:
-                        print("❌ Ruta inválida")
+                        print(" Ruta inválida")
              
 
               
               if accion == 3: # Nueva opción: Registrar Notas de Módulo
-                         print("\n--- REGISTRO DE NOTAS DE MÓDULO ---")
-                # Solo se evalúa si está cursando una ruta
-              if camper_encontrado["Estado"] == "Aprobado":
-                          try:
+                 print("\n--- REGISTRO DE NOTAS DE MÓDULO ---")
+                 if camper_encontrado["Estado"] == "Aprobado":
+                      
+                    try:
                             nota_teorica = float(input("Ingrese nota Teórica (30%): "))
                             nota_practica = float(input("Ingrese nota Práctica (60%): "))
                             nota_trabajos = float(input("Ingrese nota de Quices/Trabajos (10%): "))
@@ -287,23 +294,15 @@ while booleanito==True:
                             else:
                                 camper_encontrado["Riesgo"] = "Bajo"
                                 print("Módulo aprobado satisfactoriamente.")
-
-                          except ValueError:
-                            print("Error: Ingrese solo números para las notas.")
-                          else:
-                            print("Error: Solo se pueden registrar notas para campers en estado 'Aprobado'.")
-
-                    # Guardar cambios en el JSON
-                          with open("infoCampers.json", "w") as f:
+                            with open("infoCampers.json", "w") as f:
                               json.dump(infoCampers, f, indent=4)
-                         
-              if accion == 4:
-                 print("volver")
-                 booleanito= False
-                  
-                    
-#Cierre del sistema
-    if opcion1==4:
+                     
+                    except ValueError:
+                            print("Error: Ingrese solo números para las notas.")
+              
+
+                 
+     if opcion1==4:
         print("Gracias por usar nuestro sistema")
         print("Te esperamos pronto")
         print(":D")

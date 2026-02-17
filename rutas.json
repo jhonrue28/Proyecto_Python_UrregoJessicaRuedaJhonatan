@@ -1,5 +1,5 @@
 {
-    "NodeJS":  {
+    "NodeJS": {
         "capacidad_salon": 35,
         "campers": [
             1123,
@@ -22,6 +22,9 @@
     "Java": {
         "capacidad_salon": 35,
         "campers": [
+            4321,
+            1223,
+            4321,
             4321
         ],
         "trainer": "Edwen salas",

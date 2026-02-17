@@ -58,10 +58,19 @@
         "telCel": "324516743",
         "TelFijo": "6097534",
         "Estado": "Cursando",
-        "Riesgo": 0,
-        "Ruta": "NetCore",
+        "Riesgo": "Alto",
+        "Ruta": "Java",
         "Sal\u00f3n": "C1",
-        "Trainer": "Jolver"
+        "Trainer": "Edwen salas",
+        "notas_modulos": [
+            {
+                "teorica": 67.0,
+                "practica": 45.0,
+                "trabajos": 78.0,
+                "final": 54.89999999999999
+            }
+        ],
+        "Salon": "B1"
     },
     {
         "Id": 4321,
@@ -72,15 +81,20 @@
         "telCel": "3125675435",
         "TelFijo": "609876",
         "Estado": "Cursando",
-        "Riesgo": "Bajo",
+        "Riesgo": "Alto",
         "notas_modulos": [
             {
                 "teorica": 68.0,
                 "practica": 80.0,
                 "trabajos": 98.0,
                 "final": 78.2
-        }
-           
+            },
+            {
+                "teorica": 34.0,
+                "practica": 56.0,
+                "trabajos": 45.0,
+                "final": 48.3
+            }
         ],
         "Ruta": "Java",
         "Salon": "B1",
