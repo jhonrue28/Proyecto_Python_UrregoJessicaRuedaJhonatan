@@ -32,6 +32,58 @@
                 "trabajos": 90.0,
                 "final": 67.8
             }
-        ]
+        ],
+        "Ruta": "NetCore"
+    },
+    {
+        "Id": 1123,
+        "nombre": "Angelica",
+        "apellidos": "Leal",
+        "direccion": "calle17#18-25",
+        "acudiente": "Maria Leal",
+        "telCel": "313536546",
+        "TelFijo": "60789463",
+        "Estado": "Cursando",
+        "Riesgo": "Bajo",
+        "Ruta": "NodeJS",
+        "Sal\u00f3n": "A1",
+        "Trainer": "Cristian"
+    },
+    {
+        "Id": 1223,
+        "nombre": "Marcela",
+        "apellidos": "Gomez",
+        "direccion": "calel5 #56-05",
+        "acudiente": "Sofia ",
+        "telCel": "324516743",
+        "TelFijo": "6097534",
+        "Estado": "Cursando",
+        "Riesgo": 0,
+        "Ruta": "NetCore",
+        "Sal\u00f3n": "C1",
+        "Trainer": "Jolver"
+    },
+    {
+        "Id": 4321,
+        "nombre": "Ana",
+        "apellidos": "Cruz",
+        "direccion": "calle 14 768",
+        "acudiente": "Jose Miranda",
+        "telCel": "3125675435",
+        "TelFijo": "609876",
+        "Estado": "Cursando",
+        "Riesgo": "Bajo",
+        "notas_modulos": [
+            {
+                "teorica": 68.0,
+                "practica": 80.0,
+                "trabajos": 98.0,
+                "final": 78.2
+            }
+           
+        ],
+        "Ruta": "Java",
+        "Salon": "B1",
+        "Trainer": "Edwen salas"
     }
 ]

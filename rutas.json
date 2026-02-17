@@ -1,0 +1,65 @@
+{
+    "NodeJS": {
+        "capacidad_salon": 35,
+        "campers": [
+            1123,
+            1123,
+            1123
+        ],
+        "trainer": "Cristian",
+        "trainers_disponibles": [
+            "Cristian"
+        ],
+        "salon": "A1",
+        "modulos": [
+            "Fundamentos de programacion",
+            "Programacion Web",
+            "Programacion formal",
+            "Bases de datos",
+            "Backend"
+        ]
+    },
+    "Java": {
+        "capacidad_salon": 35,
+        "campers": [
+            4321
+        ],
+        "trainer": "Edwen salas",
+        "trainers_disponibles": [
+            "Edwen salas",
+            "Jolver",
+            "Kevin David",
+            "Pedro Gomez",
+            "Cristian",
+            "Carlos Rueda"
+        ],
+        "salon": "B1",
+        "modulos": [
+            "Fundamentos de programacion",
+            "Programacion Web",
+            "Programacion formal",
+            "Bases de datos",
+            "Backend"
+        ]
+    },
+    "NetCore": {
+        "capacidad_salon": 35,
+        "campers": [
+            1223
+        ],
+        "trainer": "Jolver",
+        "trainers_disponibles": [
+            "Edwen salas",
+            "Jolver",
+            "Pedro Gomez"
+        ],
+        "salon": "C1",
+        "modulos": [
+            "Fundamentos de programacion",
+            "Programacion Web",
+            "Programacion formal",
+            "Bases de datos",
+            "Backend"
+        ]
+    }
+}
