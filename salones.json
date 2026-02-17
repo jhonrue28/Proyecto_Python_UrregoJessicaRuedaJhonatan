@@ -1,0 +1,87 @@
+[{
+    "Salones":{
+        "Sputnik":{
+            "horarios":[{
+                "6:00-10:00": {
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "10:00-14:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "14:00-18:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "18:00-22:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                }
+                
+            }
+            ]
+
+        },
+        "Artemis":{
+            "horarios":[{
+                "6:00-10:00": {
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "10:00-14:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "14:00-18:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "18:00-22:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                }
+                
+            }
+            ]
+
+        },
+        "Apolo":{
+            "horarios":[{
+                "6:00-10:00": {
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "10:00-14:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "14:00-18:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                },
+                "18:00-22:00":{
+                    "trainer":0,
+                    "capacidad":35,
+                    "integrantes":[]
+                }
+                
+            }
+            ]
+
+        }
+
+    }
+}
+]

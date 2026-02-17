@@ -1,5 +1,6 @@
 {
     "NodeJS": {
+        "nombre":"NodeJS",
         "capacidad_salon": 35,
         "campers": [
             1123,
@@ -10,7 +11,7 @@
         "trainers_disponibles": [
             "Cristian"
         ],
-        "salon": "A1",
+        "salon": " ",
         "modulos": [
             "Fundamentos de programacion",
             "Programacion Web",
@@ -20,6 +21,7 @@
         ]
     },
     "Java": {
+        "nombre":"Java",
         "capacidad_salon": 35,
         "campers": [
             4321,
@@ -36,7 +38,7 @@
             "Cristian",
             "Carlos Rueda"
         ],
-        "salon": "B1",
+        "salon": " ",
         "modulos": [
             "Fundamentos de programacion",
             "Programacion Web",
@@ -46,6 +48,7 @@
         ]
     },
     "NetCore": {
+        "nombre":"Netcore",
         "capacidad_salon": 35,
         "campers": [
             1223
@@ -56,7 +59,7 @@
             "Jolver",
             "Pedro Gomez"
         ],
-        "salon": "C1",
+        "salon": " ",
         "modulos": [
             "Fundamentos de programacion",
             "Programacion Web",
