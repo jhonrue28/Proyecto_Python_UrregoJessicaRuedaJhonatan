@@ -1,140 +1,81 @@
 {
   "campers": [
     {
-      "id": 1234,
+      "id": 1009384756,
       "nombre": "Jessica",
       "apellidos": "Urrego",
       "direccion": "calle 10 #47-12",
-
-      "contacto": {
-        "acudiente": "Maria Leal",
-        "celular": "324563548",
-        "telefonoFijo": "6098754"
-      },
-
-      "academico": {
-        "estado": "Aprobado",
-        "riesgo": "Bajo",
-        "ruta": "NetCore",
-        "salon": null,
-        "trainer": null,
-        "modulos": [
-          {
-            "teorica": 60,
-            "practica": 68,
-            "trabajos": 90,
-            "final": 67.8
-          }
-        ]
-      }
+      "contacto": {"acudiente": "Maria Leal", "celular": "324563548", "telefonoFijo": "6098754"},
+      "academico": {"estado": "Aprobado", "riesgo": "Bajo", "ruta": "NetCore", "salon": "A2", "trainer": "Carlos Rivas",
+        "modulos": [{"teorica": 78.5, "practica": 82.0, "trabajos": 91.3, "final": 83.9}]}
     },
-
     {
-      "id": 1123,
+      "id": 1012847563,
       "nombre": "Angelica",
       "apellidos": "Leal",
       "direccion": "calle 17 #18-25",
-
-      "contacto": {
-        "acudiente": "Maria Leal",
-        "celular": "313536546",
-        "telefonoFijo": "60789463"
-      },
-
-      "academico": {
-        "estado": "Cursando",
-        "riesgo": "Bajo",
-        "ruta": "NodeJS",
-        "salon": "A1",
-        "trainer": "Cristian",
-        "modulos": []
-      }
+      "contacto": {"acudiente": "Maria Leal", "celular": "313536546", "telefonoFijo": "60789463"},
+      "academico": {"estado": "Cursando", "riesgo": "Bajo", "ruta": "NodeJS", "salon": "A1", "trainer": "Cristian Perez",
+        "modulos": [{"teorica": 74.2, "practica": 79.8, "trabajos": 85.4, "final": 79.8}]}
     },
-
     {
-      "id": 1223,
+      "id": 1027364958,
       "nombre": "Marcela",
       "apellidos": "Gomez",
       "direccion": "calle 5 #56-05",
-
-      "contacto": {
-        "acudiente": "Sofia",
-        "celular": "324516743",
-        "telefonoFijo": "6097534"
-      },
-
-      "academico": {
-        "estado": "Cursando",
-        "riesgo": "Alto",
-        "ruta": "Java",
-        "salon": "B1",
-        "trainer": "Edwen Salas",
-        "modulos": [
-          {
-            "teorica": 67,
-            "practica": 45,
-            "trabajos": 78,
-            "final": 54.9
-          }
-        ]
-      }
+      "contacto": {"acudiente": "Sofia Gomez", "celular": "324516743", "telefonoFijo": "6097534"},
+      "academico": {"estado": "Cursando", "riesgo": "Alto", "ruta": "Java", "salon": "B1", "trainer": "Edwen Salas",
+        "modulos": [{"teorica": 58.7, "practica": 49.5, "trabajos": 72.8, "final": 60.3}]}
     },
-
     {
-      "id": 4321,
+      "id": 1039182746,
       "nombre": "Ana",
       "apellidos": "Cruz",
       "direccion": "calle 14 #7-68",
-
-      "contacto": {
-        "acudiente": "Jose Miranda",
-        "celular": "3125675435",
-        "telefonoFijo": "609876"
-      },
-
-      "academico": {
-        "estado": "Cursando",
-        "riesgo": "Alto",
-        "ruta": "Java",
-        "salon": "B1",
-        "trainer": "Edwen Salas",
-        "modulos": [
-          {
-            "teorica": 68,
-            "practica": 80,
-            "trabajos": 98,
-            "final": 78.2
-          },
-          {
-            "teorica": 34,
-            "practica": 56,
-            "trabajos": 45,
-            "final": 48.3
-          }
-        ]
-      }
+      "contacto": {"acudiente": "Jose Miranda", "celular": "3125675435", "telefonoFijo": "609876"},
+      "academico": {"estado": "Cursando", "riesgo": "Medio", "ruta": "Java", "salon": "B1", "trainer": "Edwen Salas",
+        "modulos": [{"teorica": 88.4, "practica": 90.1, "trabajos": 93.6, "final": 90.7}]}
     },
-
     {
-      "id": 1033711268,
+      "id": 1048273649,
       "nombre": "Jhonatan",
       "apellidos": "Rueda",
       "direccion": "cra 21 #202-19",
+      "contacto": {"acudiente": "Aniceto Rueda", "celular": "3212260838", "telefonoFijo": "607589654"},
+      "academico": {"estado": "Cursando", "riesgo": "Medio", "ruta": "Python", "salon": "C2", "trainer": "Laura Medina",
+        "modulos": [{"teorica": 69.3, "practica": 73.8, "trabajos": 80.0, "final": 74.4}]}
+    },
 
-      "contacto": {
-        "acudiente": "Aniceto Rueda",
-        "celular": "3212260838",
-        "telefonoFijo": "607589654"
-      },
-
-      "academico": {
-        "estado": null,
-        "riesgo": null,
-        "ruta": null,
-        "salon": null,
-        "trainer": null,
-        "modulos": []
-      }
+    {
+      "id": 1050000001, "nombre": "Camila", "apellidos": "Torres", "direccion": "calle 20 #10-30",
+      "contacto": {"acudiente": "Luis Torres", "celular": "3004512001", "telefonoFijo": "6001001"},
+      "academico": {"estado": "Cursando", "riesgo": "Bajo", "ruta": "Python", "salon": "A1", "trainer": "Laura Medina",
+        "modulos": [{"teorica": 81.2, "practica": 79.4, "trabajos": 88.1, "final": 82.9}]}
+    },
+    {
+      "id": 1050000002, "nombre": "Daniel", "apellidos": "Ramirez", "direccion": "cra 12 #44-18",
+      "contacto": {"acudiente": "Claudia Ramirez", "celular": "3004512002", "telefonoFijo": "6001002"},
+      "academico": {"estado": "Cursando", "riesgo": "Medio", "ruta": "Java", "salon": "B2", "trainer": "Edwen Salas",
+        "modulos": [{"teorica": 67.4, "practica": 72.5, "trabajos": 75.3, "final": 71.7}]}
+    },
+    {
+      "id": 1050000003, "nombre": "Valentina", "apellidos": "Morales", "direccion": "calle 8 #30-15",
+      "contacto": {"acudiente": "Pedro Morales", "celular": "3004512003", "telefonoFijo": "6001003"},
+      "academico": {"estado": "Cursando", "riesgo": "Bajo", "ruta": "NodeJS", "salon": "A3", "trainer": "Cristian Perez",
+        "modulos": [{"teorica": 84.3, "practica": 87.2, "trabajos": 90.0, "final": 87.2}]}
+    },
+    {
+      "id": 1050000004, "nombre": "Sebastian", "apellidos": "Herrera", "direccion": "cra 9 #21-44",
+      "contacto": {"acudiente": "Julia Herrera", "celular": "3004512004", "telefonoFijo": "6001004"},
+      "academico": {"estado": "Cursando", "riesgo": "Medio", "ruta": "NetCore", "salon": "C1", "trainer": "Carlos Rivas",
+        "modulos": [{"teorica": 72.0, "practica": 70.6, "trabajos": 78.4, "final": 73.7}]}
+    },
+    {
+      "id": 1050000005, "nombre": "Laura", "apellidos": "Castro", "direccion": "calle 33 #11-09",
+      "contacto": {"acudiente": "Marta Castro", "celular": "3004512005", "telefonoFijo": "6001005"},
+      "academico": {"estado": "Cursando", "riesgo": "Alto", "ruta": "Java", "salon": "B3", "trainer": "Edwen Salas",
+        "modulos": [{"teorica": 55.8, "practica": 60.2, "trabajos": 63.5, "final": 59.8}]}
     }
   ]
 }
+
