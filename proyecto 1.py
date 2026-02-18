@@ -200,122 +200,94 @@ while booleanito==True:
         print("Eres Trainer")
   
     if opcion1 == 3:
-           
-     print("\n--- MENÚ COORDINADOR ---")
-     with open("infoCampers.json", "r") as f:
-        infoCampers = json.load(f)
        
-        print("¿Cómo deseas buscar al Camper?")
-        print("1. Por ID")
-        print("2. Por Nombre y Apellido")
-        print("3. Volver Atras")
+     def ver_campers(infoCampers):
+        print("\n--- LISTADO DE CAMPERS ---")
+        for i in range(len(infoCampers["campers"])):
+            print(f"{i+1}. {infoCampers['campers'][i]['nombre']} {infoCampers['campers'][i]['apellido']}")
+            print(f"   Estado: {infoCampers['campers'][i]['estado']}")
+            print(f"   Ruta: {infoCampers['campers'][i]['ruta']}")
+            print("-" )
+
+     def crear_salon(salones):
+            nombre = input("Nombre del nuevo salón (Sputnik/Artemis/Apolo): ")
+            nuevo_salon = {"nombre": nombre, "capacidad": 35}
+            datos["salones"].append(nuevo_salon)
+            print(f"Salón {nombre} creado con éxito.")
+
+     def ver_trainers(trainers):
+            print("\n--- LISTADO DE TRAINERS ---")
+            for i in range(len(trainers)):
+                print(f"{i+1}. {trainers[i]['nombre']}")
+                print(f"   Rutas: {trainers[i]['ruta']}")
+                print(f"   Horario: {trainers[i]['horario']}")
+                print("-" )
+
+     def ver_rutas(rutas):
+            print("\n--- RUTAS DISPONIBLES ---")
+            for i in range(len(rutas)):
+                print(f"{i+1}. {ver_rutas[i]['nombre']}")
+     def asignar_camper_a_ruta(infoCampers):
+      print("\n--- ASIGNAR CAMPER A RUTA ---")
+    
+    # 1. Pedimos el ID directamente
+      documento = input("Ingrese el número de identificación del camper: ")
+
+    # 2. Buscamos al camper con un for i
+     for i in range(len(datos["campers"])):
         
-        metodo = int(input(": "))
+        # Si encontramos al camper con ese ID:
+        if datos["campers"][i]["id"] == documento:
+            
+            # Verificamos si aprobó
+            if datos["campers"][i]["estado"] == "Aprobado":
+                
+                print(f"Camper {datos['campers'][i]['nombre']} encontrado.")
+                nueva_ruta = input("Ingrese el nombre de la ruta (Java, NodeJS, NetCore): ")
+                
+                # Cambiamos los datos directamente usando [i]
+                datos["campers"][i]["ruta"] = nueva_ruta
+                datos["campers"][i]["estado"] = "Cursando"
+                
+                print("¡Ruta asignada con éxito!")
+               return # Salimos de la función porque ya lo encontramos
+            else:
+                print("El camper aún no está aprobado.")
+               return
 
-        camper_encontrado = None
+    # Si el bucle termina y no encontró nada:
+    print("No se encontró ningún camper con ese número de identificación.")
 
-        if metodo == 1:
-            id_buscar = int(input("Ingrese el ID: "))
-            if infoCampers["campers"][i]["id"] == id_buscar:
-                camperEncontrado=True
-        elif metodo == 2:
-            nom = input("Nombre: ")
-            ape = input("Apellido: ")
-            if infoCampers["campers"][i]["nombre"].lower().strip()== nom.lower().strip() and infoCampers["campers"][i]["apellidos"].lower().strip()==ape.lower().strip():
-                camperEncontrado=True
-                  
-            if camper_encontrado==True:
-                print(f"\nCamper seleccionado: {infoCampers["campers"][i]["academico"]['nombre']} (Estado: {infoCampers["campers"][i]["academico"]['Estado']})")
-                print("1. Cambiar Estado (Aprobado/Expulsado/etc)")
-                print("2. Asignar Ruta de Entrenamiento")
-                print("3. Registrar Notas De Estudiante")
-                print("4. Volver atras")
-                accion = int(input(": "))
+     def menu_coordinador(datos):
+            while True:
+                print("\n===== MENÚ COORDINADOR =====")
+                print("1. Ver Campers")
+                print("2. Crear Salón")
+                print("3. Ver Trainers")
+                print("4. Ver Rutas")
+                print("5. Asignar Camper a Ruta")
+                print("6. Salir")
 
-                if accion == 1:
-                        print("Estados: 1.Aprobado, 2.Expulsado, 3.Retirado")
-                        nuevo_est = int(input(": "))
-                        mapa = {1: "Aprobado", 2: "Expulsado", 3: "Retirado"}
-                        if nuevo_est in mapa:
-                            infoCampers["campers"][i]["academicas"]["Estado"] = mapa[nuevo_est]
-                        print("Estado actualizado.")
-                if accion == 2:
-                        with open('./rutas.json', "r+") as f:
-                            rutas = json.load(f)
+                opcion = input("Seleccione: ")
 
-                        print("\n--- RUTAS DISPONIBLES ---")
-                        for i in range(len(rutas)):
-                            if rutas[i]["capacidad"]< rutas[i]["integrantes"]:
-                                print(rutas[i]["Nombre"])
-                                print("horarios disponibles")
-
-                        ruta_elegida = input("Ingrese la ruta a asignar: ")
-
-                        if ruta_elegida in range:
-                            ruta_info = rutas[ruta_elegida]
-                        if len(ruta_info["campers"]) < ruta_info["capacidad_salon"]:
-                            # Guardamos la asignación dentro del camper
-                            camper_encontrado["Ruta"] = ruta_elegida
-                            camper_encontrado["Salon"] = ruta_info["salon"]
-                            camper_encontrado["Trainer"] = ruta_info["trainer"]
-                            camper_encontrado["Estado"] = "Cursando"
-
-                            # Actualizamos la lista de campers de la ruta
-                            ruta_info["campers"].append(camper_encontrado["Id"])
-
-                            # Guardamos cambios en ambos JSON
-                            with open("infoCampers.json", "w") as f:
-                                json.dump(infoCampers, f, indent=4)
-                            with open("rutas.json", "w") as f:
-                                json.dump(rutas, f, indent=4)
-
-                            print(f" Camper {camper_encontrado['nombre']} asignado a {ruta_elegida} con Trainer {ruta_info['trainer']} en el salón {ruta_info['salon']}")
-                        else:
-                            print(" La ruta seleccionada ya alcanzó su capacidad máxima")
-                        
-                            print(" Ruta inválida") 
-                if accion == 3: # Nueva opción: Registrar Notas de Módulo
-                 print("\n--- REGISTRO DE NOTAS DE MÓDULO ---")
-                 if camper_encontrado["Estado"] == "Aprobado":
-                      
-                    try:
-                            nota_teorica = float(input("Ingrese nota Teórica (30%): "))
-                            nota_practica = float(input("Ingrese nota Práctica (60%): "))
-                            nota_trabajos = float(input("Ingrese nota de Quices/Trabajos (10%): "))
-                            
-                            # Cálculo con porcentajes
-                            nota_final = (nota_teorica * 0.3) + (nota_practica * 0.6) + (nota_trabajos * 0.1)
-                            
-                            print(f"\nLa nota final obtenida es: {nota_final:.2f}")
-
-                            # Guardamos el historial de notas en el objeto del camper
-                            if "notas_modulos" not in camper_encontrado:
-                                camper_encontrado["notas_modulos"] = []
-                            
-                            registroNotas= {
-                            "teorica": nota_teorica,
-                            "practica": nota_practica,
-                                "trabajos": nota_trabajos,
-                                "final": nota_final
-                            }
-                            camper_encontrado["notas_modulos"].append(registroNotas)
-
-                            # Lógica de Rendimiento Bajo (Llamado de atención)
-                            if nota_final < 60:
-                                camper_encontrado["Riesgo"] = "Alto"
-                                print("¡ALERTA!: Rendimiento bajo. Se ha generado un llamado de atención.")
-                            else:
-                                camper_encontrado["Riesgo"] = "Bajo"
-                                print("Módulo aprobado satisfactoriamente.")
-                            with open("infoCampers.json", "w") as f:
-                              json.dump(infoCampers, f, indent=4)
-                     
-                    except ValueError:
-                            print("Error: Ingrese solo números para las notas.")
+                if opcion == "1":
+                    ver_campers(infoCampers)
+                elif opcion == "2":
+                    crear_salon(salones)
+                elif opcion == "3":
+                    ver_trainers(trainers)
+                elif opcion == "4":
+                    ver_rutas(ruta)
+                elif opcion == "5":
+                    asignar_camper_a_ruta(infoCampers)
+                elif opcion == "6":
+                    # Aquí llamarías a tu función para guardar el JSON
+                    print("Guardando datos y saliendo...")
+                    break
                 else:
-                    print("Camper no encontrado en el JSON")
-                    print("Aún no existe para nosotros :P")
-                    print("Busquemos a alguien con ese nombre o ID JAJAJJAJAJ")
+                    print("Opción inválida")
+
+    
     if opcion1==4:
         print("Gracias por usar nuestro sistema")
         print("Te esperamos pronto")
