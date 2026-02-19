@@ -162,87 +162,87 @@ while booleanito==True:
                
     if opcion1==2:
         condMenuTrainer = True
-        while condMenuTrainer:
-            print("¿Cuál es tu nombre?")
-            nombreTrainer = input(": ").strip().lower()
-            with open("trainers.json", "r") as f:
-                trainers = json.load(f)
-                trainerEncontrado = None
-                for trainer in trainers:
-                    if trainer["nombre"].lower().strip() == nombreTrainer:
-                        trainerEncontrado = trainer
-                        break
-                if not trainerEncontrado:
-                    print("No se encontró ningún trainer con ese nombre.")
-                    continue
+        print("¿Cuál es tu nombre?")
+        nombreTrainer = input(": ").strip().lower()
+        with open("trainers.json", "r") as f:
+            trainers = json.load(f)
+            trainerEncontrado = None
+            for trainer in trainers:
+                if trainer["nombre"].lower().strip() == nombreTrainer:
+                    trainerEncontrado = trainer
+                    break
+            if not trainerEncontrado:
+                print("No se encontró ningún trainer con ese nombre.")
+                continue
+            if trainerEncontrado==trainer:
+                while condMenuTrainer:
+                    print("Bienvenido al menú de trainer")
+                    print("¿Qué deseas hacer?")
+                    print("1. Ver campers a cargo")
+                    print("2. Modificar información de campers a cargo")
+                    print("3. Volver al menú principal")
+                    decisionTrainer = int(input(": "))
 
-            print("Bienvenido al menú de trainer")
-            print("¿Qué deseas hacer?")
-            print("1. Ver campers a cargo")
-            print("2. Modificar información de campers a cargo")
-            print("3. Volver al menú principal")
-            decisionTrainer = int(input(": "))
+                    if decisionTrainer == 1:
+                        with open("infoCampers.json", "r") as f:
+                            infoCampers = json.load(f)
+                            print("\n--- LISTADO DE CAMPERS A CARGO ---")
+                            campers_a_cargo = [
+                                camper for camper in infoCampers["campers"]
+                                if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
+                            ]
+                            if campers_a_cargo:
+                                for camper in campers_a_cargo:
+                                    print(f"{camper['nombre']} {camper['apellidos']} - Ruta: {camper['academico']['ruta']} - Salón: {camper['academico']['salon']}")
+                            else:
+                                print("No tienes campers a cargo.")
 
-            if decisionTrainer == 1:
-                with open("infoCampers.json", "r") as f:
-                    infoCampers = json.load(f)
-                    print("\n--- LISTADO DE CAMPERS A CARGO ---")
-                    campers_a_cargo = [
-                        camper for camper in infoCampers["campers"]
-                        if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
-                    ]
-                    if campers_a_cargo:
-                        for camper in campers_a_cargo:
-                            print(f"{camper['nombre']} {camper['apellidos']} - Ruta: {camper['academico']['ruta']} - Salón: {camper['academico']['salon']}")
+                    elif decisionTrainer == 2:
+                        with open("infoCampers.json", "r+") as f:
+                            infoCampers = json.load(f)
+                            campers_a_cargo = [
+                                camper for camper in infoCampers["campers"]
+                            if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
+                            ]
+                            if not campers_a_cargo:
+                                print("No tienes campers a cargo para modificar.")
+                                continue
+
+                            print("¿Qué camper deseas modificar?")
+                            for idx, camper in enumerate(campers_a_cargo, start=1):
+                                print(f"{idx}. {camper['nombre']} {camper['apellidos']}")
+                            seleccion = int(input("Seleccione el número del camper: "))
+                            if 1 <= seleccion <= len(campers_a_cargo):
+                                camper_seleccionado = campers_a_cargo[seleccion - 1]
+                                print("¿Qué información deseas modificar?")
+                                print("1. Notas")
+                                opcion_modificacion = input("Seleccione: ")
+                                if opcion_modificacion == "1":
+                                    print("Ingrese las nuevas notas del camper:")
+                                    teorica = float(input("Nota teórica: "))
+                                    practica = float(input("Nota práctica: "))
+                                    trabajos = float(input("Nota trabajos: "))
+                                    final = float(input("Nota final: "))
+                                    camper_seleccionado["academico"]["modulos"] = [{
+                                        "teorica": teorica,
+                                        "practica": practica,
+                                        "trabajos": trabajos,
+                                        "final": final
+                                    }]
+                                    with open("infoCampers.json", "w") as f:
+                                        json.dump(infoCampers, f, indent=4)
+                                    print("Información del camper actualizada con éxito.")
+                                else:
+                                    print("Opción inválida.")
+                            else:
+                                print("Selección inválida.")
+
+                    elif decisionTrainer == 3:
+                        print("Volviendo al menú principal...")
+                        condMenuTrainer = False
+
                     else:
-                        print("No tienes campers a cargo.")
-
-            elif decisionTrainer == 2:
-                with open("infoCampers.json", "r+") as f:
-                    infoCampers = json.load(f)
-                    campers_a_cargo = [
-                        camper for camper in infoCampers["campers"]
-                       if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
-                    ]
-                    if not campers_a_cargo:
-                        print("No tienes campers a cargo para modificar.")
-                        continue
-
-                    print("¿Qué camper deseas modificar?")
-                    for idx, camper in enumerate(campers_a_cargo, start=1):
-                        print(f"{idx}. {camper['nombre']} {camper['apellidos']}")
-                    seleccion = int(input("Seleccione el número del camper: "))
-                    if 1 <= seleccion <= len(campers_a_cargo):
-                        camper_seleccionado = campers_a_cargo[seleccion - 1]
-                        print("¿Qué información deseas modificar?")
-                        print("1. Notas")
-                        opcion_modificacion = input("Seleccione: ")
-                        if opcion_modificacion == "1":
-                            print("Ingrese las nuevas notas del camper:")
-                            teorica = float(input("Nota teórica: "))
-                            practica = float(input("Nota práctica: "))
-                            trabajos = float(input("Nota trabajos: "))
-                            final = float(input("Nota final: "))
-                            camper_seleccionado["academico"]["modulos"] = [{
-                                "teorica": teorica,
-                                "practica": practica,
-                                "trabajos": trabajos,
-                                "final": final
-                            }]
-                            with open("infoCampers.json", "w") as f:
-                                json.dump(infoCampers, f, indent=4)
-                            print("Información del camper actualizada con éxito.")
-                        else:
-                            print("Opción inválida.")
-                    else:
-                        print("Selección inválida.")
-
-            elif decisionTrainer == 3:
-                print("Volviendo al menú principal...")
-                condMenuTrainer = False
-
-            else:
-                print("Opción inválida.")
+                        print("Opción inválida.")
 
     if opcion1 == 3:
         import json
