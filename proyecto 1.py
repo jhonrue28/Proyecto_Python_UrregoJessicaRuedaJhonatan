@@ -189,7 +189,7 @@ while booleanito==True:
                     print("\n--- LISTADO DE CAMPERS A CARGO ---")
                     campers_a_cargo = [
                         camper for camper in infoCampers["campers"]
-                        if camper["academico"]["trainer"].lower().strip() == trainerEncontrado["nombre"].lower().strip()
+                        if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
                     ]
                     if campers_a_cargo:
                         for camper in campers_a_cargo:
@@ -202,7 +202,7 @@ while booleanito==True:
                     infoCampers = json.load(f)
                     campers_a_cargo = [
                         camper for camper in infoCampers["campers"]
-                        if camper["academico"]["trainer"].lower().strip() == trainerEncontrado["nombre"].lower().strip()
+                       if str(camper["academico"]["trainer"]).lower().strip() == trainerEncontrado["nombre"].lower().strip()
                     ]
                     if not campers_a_cargo:
                         print("No tienes campers a cargo para modificar.")
@@ -433,55 +433,68 @@ while booleanito==True:
 
                     if decisionSalones == "1":
                         with open("salones.json", "r+") as f:
-                            salones = json.load(f)
+                            datos = json.load(f)
+                            salones_dict = datos[0]["Salones"]
                             nombre = input("Ingrese el nombre del nuevo salón: ")
                             nuevo_salon = {
-                                "nombre": nombre,
-                                "capacidad": 35,
-                                "horarios": []
+                                "horarios": [
+                                    {
+                                        "6:00-10:00": {"ruta": 0, "trainer": 0, "capacidad": 35, "integrantes": []},
+                                        "10:00-14:00": {"ruta": 0, "trainer": 0, "capacidad": 35, "integrantes": []},
+                                        "14:00-18:00": {"ruta": 0, "trainer": 0, "capacidad": 35, "integrantes": []},
+                                        "18:00-22:00": {"ruta": 0, "trainer": 0, "capacidad": 35, "integrantes": []}
+                                    }
+                                ]
                             }
-                            salones.append(nuevo_salon)
+                            salones_dict[nombre] = nuevo_salon
                             f.seek(0)
-                            json.dump(salones, f, indent=4)
+                            json.dump(datos, f, indent=4)
                             f.truncate()
                         print(f"Salón {nombre} creado con éxito.")
                     elif decisionSalones == "2":
                         with open("salones.json", "r") as f:
-                            salones = json.load(f)
+                            datos = json.load(f)
+                            salones_dict = datos[0]["Salones"]
                             print("\n--- LISTADO DE SALONES ---")
-                            for i, salon in enumerate(salones, start=1):
-                                print(f"{i}. {salon['nombre']} - Capacidad: {salon['capacidad']}")
-                                print(f"   Horarios: {salon['horarios']}")
+                            for i, (nombre_salon, info_salon) in enumerate(salones_dict.items(), start=1):
+                                print(f"{i}. {nombre_salon}")
+                                if info_salon.get("horarios"):
+                                    print(f"   Horarios: {list(info_salon['horarios'][0].keys())}")
                     elif decisionSalones == "3":
                         with open("salones.json", "r+") as f:
-                            salones = json.load(f)
+                            datos = json.load(f)
+                            salones_dict = datos[0]["Salones"]
                             print("¿Qué salón deseas modificar?")
-                            for i, salon in enumerate(salones, start=1):
-                                print(f"{i}. {salon['nombre']}")
+                            salones_lista = list(salones_dict.keys())
+                            for i, nombre_salon in enumerate(salones_lista, start=1):
+                                print(f"{i}. {nombre_salon}")
                             seleccion = int(input("Seleccione el número del salón: "))
-                            if 1 <= seleccion <= len(salones):
-                                salon_seleccionado = salones[seleccion - 1]
-                                nuevo_nombre = input("Ingrese el nuevo nombre del salón: ")
-                                salon_seleccionado["nombre"] = nuevo_nombre
+                            if 1 <= seleccion <= len(salones_lista):
+                                nombre_antiguo = salones_lista[seleccion - 1]
+                                nombre_nuevo = input("Ingrese el nuevo nombre del salón: ")
+                                salones_dict[nombre_nuevo] = salones_dict.pop(nombre_antiguo)
                                 f.seek(0)
-                                json.dump(salones, f, indent=4)
+                                json.dump(datos, f, indent=4)
                                 f.truncate()
                                 print("Información del salón actualizada con éxito.")
                             else:
                                 print("Selección inválida.")
                     elif decisionSalones == "4":
                         with open("salones.json", "r+") as f:
-                            salones = json.load(f)
+                            datos = json.load(f)
+                            salones_dict = datos[0]["Salones"]
                             print("¿Qué salón deseas eliminar?")
-                            for i, salon in enumerate(salones, start=1):
-                                print(f"{i}. {salon['nombre']}")
+                            salones_lista = list(salones_dict.keys())
+                            for i, nombre_salon in enumerate(salones_lista, start=1):
+                                print(f"{i}. {nombre_salon}")
                             seleccion = int(input("Seleccione el número del salón: "))
-                            if 1 <= seleccion <= len(salones):
-                                salon_eliminado = salones.pop(seleccion - 1)
+                            if 1 <= seleccion <= len(salones_lista):
+                                salon_eliminado = salones_lista[seleccion - 1]
+                                del salones_dict[salon_eliminado]
                                 f.seek(0)
-                                json.dump(salones, f, indent=4)
+                                json.dump(datos, f, indent=4)
                                 f.truncate()
-                                print(f"Salón {salon_eliminado['nombre']} eliminado con éxito.")
+                                print(f"Salón {salon_eliminado} eliminado con éxito.")
                             else:
                                 print("Selección inválida.")
                     elif decisionSalones == "5":

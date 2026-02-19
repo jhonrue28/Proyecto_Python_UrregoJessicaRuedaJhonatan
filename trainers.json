@@ -1,32 +1,48 @@
 [
     {
-        "nombre": "Edwin Salaz", 
-        "ruta": ["Java", "Netcore"], 
+        "nombre": "Edwin Salaz",
+        "ruta": [
+            "Java",
+            "Netcore"
+        ],
         "horario": "6:00-14:00"
     },
     {
         "nombre": "Jolver Palo",
-        "ruta": ["Java", "Netcore"],
+        "ruta": [
+            "Java",
+            "Netcore"
+        ],
         "horario": "6:00-14:00"
     },
     {
         "nombre": "Kevin David",
-        "ruta": ["Java"],
+        "ruta": [
+            "Java"
+        ],
         "horario": "6:00-14:00"
     },
     {
         "nombre": "Pedro Gomez",
-        "ruta": ["Java", "Nodejs"],
+        "ruta": [
+            "Java",
+            "Nodejs"
+        ],
         "horario": "6:00-14:00"
     },
     {
         "nombre": "Cristian Diaz",
-        "ruta": ["Java", "Nodejs"],
+        "ruta": [
+            "Java",
+            "Nodejs"
+        ],
         "horario": "10:00-18:00"
     },
     {
         "nombre": "Carlos Rueda",
-        "ruta": ["Java"],
+        "ruta": [
+            "Java"
+        ],
         "horario": "2:00-22:00"
     }
 ]

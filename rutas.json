@@ -1,0 +1,22 @@
+[
+    {
+        "nombre": "Python",
+        "descripcion": "Ruta enfocada en programación con Python y desarrollo backend.",
+        "duracion": "16"
+    },
+    {
+        "nombre": "Java",
+        "descripcion": "Ruta orientada a desarrollo empresarial con Java.",
+        "duracion": "20"
+    },
+    {
+        "nombre": "NodeJS",
+        "descripcion": "Ruta enfocada en desarrollo backend con JavaScript y NodeJS.",
+        "duracion": "18"
+    },
+    {
+        "nombre": "NetCore",
+        "descripcion": "Ruta especializada en desarrollo con .NET Core y C#.",
+        "duracion": "22"
+    }
+]
